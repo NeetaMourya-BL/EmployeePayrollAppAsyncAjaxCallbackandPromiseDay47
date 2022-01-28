@@ -1,5 +1,5 @@
-function makePromiseCall(methodType, url, async , data) {
-    return new Promise(function (resolve, reject){
+function makePromiseCall(methodType, url, async, data) {
+    return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.onload = function () {
             // console.log("State changed called . Ready State :"+xhr.readyState+" Status :"+xhr.status);
@@ -8,17 +8,17 @@ function makePromiseCall(methodType, url, async , data) {
                     resolve(xhr.responseText);
                 } else if (xhr.status >= 400) {
                     reject({
-                        status:xhr.status,
-                        statusText:xhr.statusText
+                        status: xhr.status,
+                        statusText: xhr.statusText
                     })
                     console.log("XHR Failed")
                 }
             }
         }
-        xhr.onerror=function (){
+        xhr.onerror = function () {
             reject({
-                status:this.status,
-                statusText:this.statusText
+                status: this.status,
+                statusText: this.statusText
             })
         }
         xhr.open(methodType, url, async);
@@ -26,7 +26,7 @@ function makePromiseCall(methodType, url, async , data) {
         if (data) {
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(JSON.stringify(data));
-        } else{
+        } else {
             xhr.send();
         }
     });
